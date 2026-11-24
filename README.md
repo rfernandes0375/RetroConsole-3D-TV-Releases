@@ -1,8 +1,8 @@
 # RetroConsole 3D TV
 
-Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, para jogar clássicos de **PlayStation 1 (PS1)** e **Nintendo 64 (N64)** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
+Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, reunindo **630 clássicos** de **PlayStation 1 (PS1)**, **Nintendo 64 (N64)**, **Arcade**, **Super Nintendo (SNES)** e **Mega Drive** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.0.5`):**  
+> **Download direto da versão mais recente (`v1.1.0`):**  
 > - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
 > - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
@@ -12,22 +12,27 @@ Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **R
 
 O **RetroConsole 3D TV** nasceu para rodar em TVs e TV Boxes com pouco armazenamento interno (como Fire TV Stick) sem precisar entupir a memória com dezenas de gigabytes de ROMs fixas.
 
-Em vez de instalar uma biblioteca inteira no aparelho, o aplicativo opera sob demanda:
-- Navegue por um catálogo curado local com **430 jogos** e **430 capas** embutidas.
-- Ao escolher um jogo, a ROM compactada (`.7z`) é baixada sob demanda, extraída em área temporária com aceleração nativa e iniciada a **60 FPS** em processo isolado.
-- Apenas seus **saves reais** (Save States e Memory Cards / SRAM validados) permanecem gravados permanentemente no dispositivo, preservando espaço e garantindo retomada segura.
+Em vez de instalar gigabytes de jogos no aparelho, o aplicativo opera de forma híbrida sob demanda:
+- Navegue por um catálogo curado com **630 jogos** e **630 capas** embutidas (**430 títulos 3D** + **200 clássicos 2D** integrados do **RetroArcade TV**).
+- **Jogos 3D (PS1 e N64):** a ROM compactada (`.7z`) é baixada sob demanda, extraída em área temporária com aceleração nativa e executada a **60 FPS** pelo motor nativo **LibretroDroid** em processo isolado `:player`, gravando permanentemente apenas os seus **saves reais** (Save States e Memory Cards / SRAM validados).
+- **Clássicos 2D (Arcade, SNES e Mega Drive):** executam diretamente via motor web ad-free integrado (**ArcadeWebView**) em tela cheia, sem precisar baixar pacotes `.7z` nem ocupar armazenamento interno do Fire TV (requer internet ativa).
 
 ---
 
 ## Principais Recursos
 
-- **Catálogo completo e offline-first na vitrine:** **430 jogos** (**295 de Nintendo 64** e **135 de PlayStation 1**), incluindo **24 títulos multi-disco de PS1** (2, 3 e 4 CDs) com seletor rápido de disco no Menu Rápido.
-- **Execução isolada e estável:** motor nativo **LibretroDroid** (`pcsx_rearmed` para PS1 e `mupen64plus_next` para N64, ABIs `armeabi-v7a` e `arm64-v8a`) rodando em processo dedicado `:player`, com retorno limpo coordenado pelo `PlayerExitCoordinator`.
+- **Catálogo unificado com 630 jogos e capas locais:**
+  - **Clássicos 3D (430 títulos):** **295 de Nintendo 64** e **135 de PlayStation 1** (incluindo **24 jogos multi-disco** de 2, 3 e 4 CDs).
+  - **Clássicos 2D integrados do RetroArcade TV (200 títulos):** **82 de Arcade**, **61 de Super Nintendo (SNES)** e **57 de Mega Drive**.
+  - Filtros combináveis por plataforma (**Todos**, **Favoritos**, **Recentes**, **Com Save**, **Nintendo 64**, **PlayStation 1**, **Arcade**, **SNES**, **Mega Drive**), gênero, busca sem acento e modo `2 Jogadores`.
+- **Arquitetura Híbrida de Dois Motores Isolados:**
+  - **Motor 3D Nativo (`EngineType.LIBRETRO_3D`):** `LibretroDroid` (`pcsx_rearmed` e `mupen64plus_next`, `armeabi-v7a` e `arm64-v8a`) no processo dedicado `:player`, com cache `active_rom/` / `kept_rom/`, extração `.7z` via `libarchive`, Memory Cards/saves locais e os 3 perfis visuais (`Imagem Nítida (HD)`, `TV de Tubo (Retrô)`, `Modo Leve`).
+  - **Motor Clássicos 2D Web (`EngineType.ARCADE_WEB`):** `ArcadeWebPlayerActivity` + `ArcadeWebView` + `ArcadeDomCleanerScript` + `ArcadeAdBlocker` integrados do RetroArcade TV, rodando online em tela cheia 16:9 sem anúncios/pop-ups, com suporte a 2 controles DualShock 4 Bluetooth e checagem prévia de conexão.
 - **Extração `.7z` nativa acelerada:** decodificação em C/C++ via `libarchive` (com fallback JVM), buffers amplos de `256 KB` e barra de progresso em tempo real exibindo percentual (`%`), velocidade, tamanho em MB, tempo decorrido e estimativa restante.
 - **Armazenamento inteligente e autolimpeza:**
   - `active_rom/`: área temporária limpa automaticamente ao cancelar, encerrar o jogo ou detectar `.7z` corrompido/truncado.
   - `kept_rom/`: opção ao sair do jogo para manter até **1 jogo/disco** no cache para abertura instantânea na próxima partida.
-  - Barra compacta de retomada rápida no cabeçalho (`Último jogado` + status real de save + botão **Retomar**) sem poluir os 430 cards da grade.
+  - Barra compacta de retomada rápida no cabeçalho (`Último jogado` + status real de save + botão **Retomar**) sem poluir os 630 cards da grade.
 - **Detecção estrita de saves reais:** validação binária de Memory Cards de PS1 e EEPROM/MemPak/SRAM/FlashRAM de N64 (`SramSaveValidator` e `SaveStateRepository`), separando rigorosamente **Recentes** de **Com Save** (badge `SAVE`).
 - **Atualizações automáticas (OTA) integradas:** botão **Atualizar** no cabeçalho com checagem silenciosa na abertura e periódica (intervalo mínimo de 30 minutos), indicador discreto `• Atualizar (vX.Y.Z)`, verificação criptográfica `SHA-256` antes da instalação e zero tokens embutidos no APK.
 - **Controles refinados para TV e Gamepad:** suporte nativo a DualShock/Analógicos no PS1 com espelhamento inteligente do analógico esquerdo para D-Pad em jogos clássicos sem suporte analógico, atalho seguro do Menu Rápido sem colisões em partidas e busca/filtros combináveis por plataforma, gênero e modo `2 Jogadores`.
@@ -66,7 +71,11 @@ Em vez de instalar uma biblioteca inteira no aparelho, o aplicativo opera sob de
    - Criação de perfis gráficos configuráveis em tempo real no Menu Rápido (`VisualQualityProfile`): **Imagem Nítida (HD)** (padrão recomendado com `NEON 2x` no PS1, `640x480`/`960x540` no N64 e shader `Sharp`), **TV de Tubo (Retrô)** (resolução 2x + shader `CRT`) e **Modo Leve (Mais Rápido)** (`1x` nativo com `ShaderConfig.Sharp` para máxima fluidez com bordas limpas em modelos antigos de Fire TV Stick).
 
 8. **Padronização Limpa das Capas na Grade da Vitrine (`HomeActivity`)**
-   - Refatoração de `item_game_card.xml`, `bg_card_cover_frame.xml` e `GameCardAdapter` para exibir todas as 430 capas sem cortes (`fitCenter` + `adjustViewBounds`) em moldura escura arredondada (`10dp`) harmonizada ao modal de download, movendo selos (`PS1`/`N64`, `2P`, `SAVE`, `★`, tamanho, `CDs` e `EM CACHE`) para faixas dedicadas acima e abaixo da capa com recorte único no `ViewHolder` para manter rolagem fluida.
+   - Refatoração de `item_game_card.xml`, `bg_card_cover_frame.xml` e `GameCardAdapter` para exibir todas as capas sem cortes (`fitCenter` + `adjustViewBounds`) em moldura escura arredondada (`10dp`) harmonizada ao modal de download, movendo selos para faixas dedicadas acima e abaixo da capa com recorte único no `ViewHolder` para manter rolagem fluida.
+
+9. **Integração Híbrida com o RetroArcade TV (`v1.1.0` — 630 Jogos)**
+   - Importação isolada do motor WebView do **RetroArcade TV** (`ArcadeWebPlayerActivity`, `ArcadeWebView`, `ArcadeDomCleanerScript`, `ArcadeAdBlocker`, `ArcadeInputMapper` P1/P2 e `ArcadePlayerDiagnostics`) sob `com.retroconsole3d.tv.arcade`, somada aos **200 clássicos 2D** (**82 Arcade**, **61 SNES**, **57 Mega Drive**) e suas **200 capas PNG** em `assets/covers/arcade/`.
+   - Roteamento estritamente separado por `EngineType` (`LIBRETRO_3D` vs. `ARCADE_WEB`): jogos 3D preservam 100% o fluxo Google Drive / `.7z` / `libarchive` / cache / saves locais / `:player`, enquanto clássicos 2D pulam o cache de ROMs, validam conexão ativa e abrem direto no player Web ad-free com confirmação dupla de saída no botão `Voltar`.
 
 ---
 
@@ -113,6 +122,12 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 ---
 
 ## Histórico de Versões
+
+### v1.1.0 (código 7)
+- **Integração completa do motor WebView e catálogo RetroArcade TV (630 jogos no total):** unificação dos **200 clássicos 2D** (**82 Arcade**, **61 SNES** e **57 Mega Drive**, com capas locais PNG e badge `ONLINE`) aos **430 jogos 3D** (**295 N64** e **135 PS1**), com novas abas de filtro na tela inicial mantendo gêneros e filtro `2 Jogadores` para todo o catálogo.
+- **Execução 100% isolada por motor (`EngineType.LIBRETRO_3D` vs. `EngineType.ARCADE_WEB`):**
+  - **PS1 e N64 (3D):** mantêm fluxo completo sob demanda com Google Drive API v3, `.7z` via `libarchive`, cache `active_rom/` vs. `kept_rom/`, detecção estrita de saves reais, analógico PS1 e perfis gráficos (`Imagem Nítida HD`, `TV de Tubo`, `Modo Leve`).
+  - **Arcade, SNES e Mega Drive (2D Online):** executam direto na `ArcadeWebPlayerActivity` (`ArcadeWebView` + `ArcadeDomCleanerScript` + `ArcadeAdBlocker`), sem ocupar cache de ROMs no Fire TV, com checagem prévia de conexão à internet, suporte Bluetooth DualShock 4 para 2 jogadores e Menu Rápido próprio com proteção contra saída acidental (`Voltar` 2x).
 
 ### v1.0.5 (código 6)
 - **Capas sem corte nos cards da grade (`HomeActivity`):** padronização dos cards do catálogo com enquadramento proporcional (`fitCenter` + `adjustViewBounds`) dentro de moldura escura arredondada harmonizada ao modal de download, preservando integralmente capas de PlayStation 1 (incluindo a faixa lateral "PlayStation") e de Nintendo 64 sem cortes ou distorção.
