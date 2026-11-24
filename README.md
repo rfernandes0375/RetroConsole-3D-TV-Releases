@@ -3,7 +3,8 @@
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, para jogar clássicos de **PlayStation 1 (PS1)** e **Nintendo 64 (N64)** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
 > **Download direto da versão mais recente (`v1.0.4`):**  
-> [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
+> - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
+> - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
 ---
 
@@ -83,20 +84,14 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 
 ## Guia Rápido de Instalação e Uso (Fire TV / Android TV)
 
-### Primeira Instalação
+### Instalação Rápida no Fire TV via Downloader
 
-1. No seu **Fire TV** ou **Android TV**, baixe o APK oficial pelo aplicativo **Downloader** ou navegador/gerenciador de arquivos usando o link:
-   ```text
-   https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk
-   ```
-2. Caso o sistema solicite pela primeira vez, acesse **Configurações → Meu Fire TV → Opções do desenvolvedor → Instalar apps desconhecidos** (ou **Segurança / Apps desconhecidos** no Android TV) e habilite a permissão para o aplicativo usado no download (ex.: **Downloader**).
-3. Conclua a instalação e abra o **RetroConsole 3D TV** na tela inicial.
+> **Compatibilidade:** funciona nativamente em **Amazon Fire TV** e dispositivos **Android TV / Google TV** (**não roda nativamente em Roku TV**).
 
-### Como Atualizar pelo Aplicativo (OTA)
-
-1. Quando uma nova versão estiver disponível, o botão **Atualizar** no cabeçalho superior exibirá o indicador discreto **`• Atualizar (vX.Y.Z)`** (ou clique manualmente em **Atualizar** a qualquer momento).
-2. Selecione **Baixar e Instalar**: o aplicativo baixará o novo APK, validará automaticamente o hash **SHA-256** e abrirá o instalador do sistema.
-3. Na primeira atualização interna via OTA no Android 8+ / Fire OS recente, autorize **"Instalar apps desconhecidos"** especificamente para o **RetroConsole 3D TV** quando solicitado; ao voltar, a tela de instalação continuará automaticamente.
+1. **Baixe e abra o Downloader:** procure pelo aplicativo **Downloader** (ícone laranja) na loja do seu Fire TV ou Android TV, instale-o e abra.
+2. **Digite o código `3690043`:** no campo de URL/busca do Downloader, digite **`3690043`** (ou `aftv.news/3690043`, que aponta diretamente para `https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk`) e confirme para iniciar o download.
+3. **Libere a instalação na primeira vez:** quando o Android/Fire TV bloquear a instalação inicial, clique em **Configurações**, ative **Instalar apps desconhecidos** para o **Downloader** e volte para concluir a instalação do **RetroConsole 3D TV**.
+4. **Atualizações futuras direto pelo app:** depois de instalado, basta clicar no botão **Atualizar** no cabeçalho superior do próprio **RetroConsole 3D TV** (que também exibirá **`• Atualizar (vX.Y.Z)`** quando houver versão nova). O aplicativo baixa o novo APK, valida o hash **SHA-256** e inicia o instalador — lembre-se de autorizar **Instalar apps desconhecidos** também para o **RetroConsole 3D TV** quando o sistema solicitar na primeira atualização interna.
 
 ### Controles e Atalhos
 
