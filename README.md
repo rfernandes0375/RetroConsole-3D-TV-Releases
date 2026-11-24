@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, para jogar clássicos de **PlayStation 1 (PS1)** e **Nintendo 64 (N64)** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.0.3`):**  
+> **Download direto da versão mais recente (`v1.0.4`):**  
 > [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
 ---
@@ -62,22 +62,22 @@ Em vez de instalar uma biblioteca inteira no aparelho, o aplicativo opera sob de
    - Adição de checagem silenciosa periódica de atualizações (intervalo mínimo de 30 minutos) com destaque discreto `• Atualizar (vX.Y.Z)` no cabeçalho e faixa de retomada rápida (`Último jogado` + status real de save).
 
 7. **Qualidade Visual HD & CRT Leve Otimizada para Fire TV**
-   - Criação de perfis gráficos configuráveis em tempo real no Menu Rápido (`VisualQualityProfile`): **Aprimorado HD • Recomendado** (padrão inicial com `NEON 2x` no PS1, `640x480`/`960x540` no N64 e shader `Sharp`), **Retrô Tubo • CRT Leve** (resolução 2x + shader `CRT`) e **Padrão • Desempenho Máximo** (`1x` nativo para modelos mais antigos de Fire TV Stick).
+   - Criação de perfis gráficos configuráveis em tempo real no Menu Rápido (`VisualQualityProfile`): **Imagem Nítida (HD)** (padrão recomendado com `NEON 2x` no PS1, `640x480`/`960x540` no N64 e shader `Sharp`), **TV de Tubo (Retrô)** (resolução 2x + shader `CRT`) e **Modo Leve (Mais Rápido)** (`1x` nativo com `ShaderConfig.Sharp` para máxima fluidez com bordas limpas em modelos antigos de Fire TV Stick).
 
 ---
 
 ## Qualidade Visual e Upscaling para Fire TV
 
-Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** nem introduzir *input lag* (evitando filtros pesados como `xBRZ 4x/6x` ou `CRT-Royale`), o **RetroConsole 3D TV** disponibiliza três perfis gráficos leves persistidos entre sessões e alternáveis diretamente em **Menu Rápido → Qualidade Visual**:
+Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** nem introduzir *input lag* (evitando filtros pesados como `xBRZ 4x/6x` ou `CRT-Royale`), o **RetroConsole 3D TV** disponibiliza três perfis gráficos leves persistidos entre sessões e alternáveis diretamente em **Menu Rápido → Qualidade**:
 
-| Perfil | PlayStation 1 (`pcsx_rearmed`) | Nintendo 64 (`mupen64plus_next`) | Shader (`GLRetroView`) | Indicação |
+| Modo no Menu Rápido | PlayStation 1 (`pcsx_rearmed`) | Nintendo 64 (`mupen64plus_next`) | Shader (`GLRetroView`) | Indicação |
 | :--- | :--- | :--- | :--- | :--- |
-| **Aprimorado HD • Recomendado** *(padrão)* | NEON 2x (`pcsx_rearmed_neon_enhancement_enable = enabled`, preservando efeitos 2D) | `640x480` (`4:3`) / `960x540` (`16:9`) | `ShaderConfig.Sharp` (nitidez sem borrão) | Fire TV Stick HD/4K e TV Boxes |
-| **Retrô Tubo • CRT Leve** | NEON 2x (`enabled`) | `640x480` (`4:3`) / `960x540` (`16:9`) | `ShaderConfig.CRT` (suaviza serrilhados e *dithering*) | Visual clássico de TV de tubo |
-| **Padrão • Desempenho Máximo** | Resolução nativa 1x (`disabled`) | `320x240` (`4:3`) / `640x360` (`16:9`) | `ShaderConfig.Default` | Máxima margem de CPU/GPU em aparelhos antigos |
+| **Qualidade: Imagem Nítida (HD)** *(padrão)* | NEON 2x (`pcsx_rearmed_neon_enhancement_enable = enabled`, preservando efeitos 2D) | `640x480` (`4:3`) / `960x540` (`16:9`) | `ShaderConfig.Sharp` (bordas nítidas sem borrão) | Fire TV Stick HD/4K e TV Boxes |
+| **Qualidade: TV de Tubo (Retrô)** | NEON 2x (`enabled`) | `640x480` (`4:3`) / `960x540` (`16:9`) | `ShaderConfig.CRT` (suaviza serrilhados e *dithering*) | Visual clássico de TV de tubo |
+| **Qualidade: Modo Leve (Mais Rápido)** | Resolução nativa 1x (`disabled`) | `320x240` (`4:3`) / `640x360` (`16:9`) | `ShaderConfig.Sharp` (suavização leve e limpa) | Máxima fluidez em aparelhos mais antigos |
 
 - **Tela cheia intacta:** a mudança de qualidade visual nunca reduz a área da imagem na TV, mantendo a proporção configurada (**4:3 Original** ou **16:9 Widescreen**).
-- **Aplicação imediata e segura:** o shader gráfico é aplicado instantaneamente na fila GL; no Nintendo 64, alterações entre resolução interna `1x` e `2x` entram em vigor completamente ao reabrir o jogo, mantendo o progresso e os saves intactos.
+- **Mensagens simples no Menu Rápido:** ao alternar os modos durante a partida, o menu confirma a troca em linguagem simples e avisa quando é recomendável reabrir o jogo para obter a nitidez 2x completa, mantendo o progresso e os saves intactos.
 
 ---
 
@@ -115,6 +115,11 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 ---
 
 ## Histórico de Versões
+
+### v1.0.4 (código 5)
+- **Polimento do Modo Leve no Fire TV:** `Modo Leve (Mais Rápido)` passa a combinar resolução interna `1x` com suavização nítida (`ShaderConfig.Sharp`), mantendo os 60 FPS e reduzindo serrilhados em TVs Full HD.
+- **Rótulos e mensagens simples no Menu Rápido:** modos renomeados para **Qualidade: Imagem Nítida (HD)**, **Qualidade: TV de Tubo (Retrô)** e **Qualidade: Modo Leve (Mais Rápido)**, com confirmações diretas em linguagem acessível ao jogador (sem jargões técnicos).
+- **Documentação atualizada:** guia oficial alinhado aos novos nomes e sincronizado automaticamente no repositório público de releases.
 
 ### v1.0.3 (código 4)
 - **Perfis de Qualidade Visual e Upscaling leve para Fire TV:** inclusão de 3 perfis gráficos (`Aprimorado HD • Recomendado` como padrão inicial, `Retrô Tubo • CRT Leve` e `Padrão • Desempenho Máximo`) com NEON 2x no PS1 (`pcsx_rearmed_neon_enhancement_enable`), resolução 2x (`640x480`/`960x540`) no N64 e shaders leves (`ShaderConfig.Sharp`, `ShaderConfig.CRT` e `ShaderConfig.Default`), sem reduzir o tamanho da imagem na TV nem sacrificar os 60 FPS.
