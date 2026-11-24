@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, reunindo **630 clássicos** de **PlayStation 1 (PS1)**, **Nintendo 64 (N64)**, **Arcade**, **Super Nintendo (SNES)** e **Mega Drive** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.1.0`):**  
+> **Download direto da versão mais recente (`v1.1.1`):**  
 > - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
 > - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
@@ -90,7 +90,7 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 | **Qualidade: Modo Leve (Mais Rápido)** | Resolução nativa 1x (`disabled`) | `320x240` (`4:3`) / `640x360` (`16:9`) | `ShaderConfig.Sharp` (suavização leve e limpa) | Máxima fluidez em aparelhos mais antigos |
 
 - **Tela cheia intacta:** a mudança de qualidade visual nunca reduz a área da imagem na TV, mantendo a proporção configurada (**4:3 Original** ou **16:9 Widescreen**).
-- **Mensagens simples no Menu Rápido:** ao alternar os modos durante a partida, o menu confirma a troca em linguagem simples e avisa quando é recomendável reabrir o jogo para obter a nitidez 2x completa, mantendo o progresso e os saves intactos.
+- **Aplicação segura por console:** no **PlayStation 1**, a troca de qualidade é aplicada instantaneamente durante a partida. No **Nintendo 64**, o novo perfil é salvo imediatamente e aplicado de forma limpa ao reabrir o jogo ou ao clicar em **Reiniciar Jogo** no Menu Rápido (evitando corrupção de vídeo ou tela preta).
 
 ---
 
@@ -122,6 +122,11 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 ---
 
 ## Histórico de Versões
+
+### v1.1.1 (código 8)
+- **Correção definitiva de corrupção de imagem e tela preta no Nintendo 64 ao trocar Qualidade Visual:** bloqueio de mutações OpenGL ES em tempo de execução no núcleo `mupen64plus_next` (GLideN64), salvando imediatamente o novo perfil (`Imagem Nítida (HD)`, `TV de Tubo (Retrô)` ou `Modo Leve`) com aviso claro no Menu Rápido para aplicar ao reabrir o jogo.
+- **Recriação limpa da sessão no botão "Reiniciar Jogo" (N64):** caso o jogador altere a qualidade visual durante uma partida de Nintendo 64 e clique em **Reiniciar Jogo**, a `NativePlayerActivity` grava o SRAM com segurança e recria o contexto OpenGL limpo já com o novo perfil (preservando a ROM extraída em cache).
+- **Troca instantânea preservada no PlayStation 1:** o núcleo `pcsx_rearmed` mantém 100% intacta a aplicação imediata de shader e variáveis NEON durante o jogo.
 
 ### v1.1.0 (código 7)
 - **Integração completa do motor WebView e catálogo RetroArcade TV (630 jogos no total):** unificação dos **200 clássicos 2D** (**82 Arcade**, **61 SNES** e **57 Mega Drive**, com capas locais PNG e badge `ONLINE`) aos **430 jogos 3D** (**295 N64** e **135 PS1**), com novas abas de filtro na tela inicial mantendo gêneros e filtro `2 Jogadores` para todo o catálogo.
