@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, para jogar clássicos de **PlayStation 1 (PS1)** e **Nintendo 64 (N64)** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.0.4`):**  
+> **Download direto da versão mais recente (`v1.0.5`):**  
 > - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
 > - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
@@ -65,6 +65,9 @@ Em vez de instalar uma biblioteca inteira no aparelho, o aplicativo opera sob de
 7. **Qualidade Visual HD & CRT Leve Otimizada para Fire TV**
    - Criação de perfis gráficos configuráveis em tempo real no Menu Rápido (`VisualQualityProfile`): **Imagem Nítida (HD)** (padrão recomendado com `NEON 2x` no PS1, `640x480`/`960x540` no N64 e shader `Sharp`), **TV de Tubo (Retrô)** (resolução 2x + shader `CRT`) e **Modo Leve (Mais Rápido)** (`1x` nativo com `ShaderConfig.Sharp` para máxima fluidez com bordas limpas em modelos antigos de Fire TV Stick).
 
+8. **Padronização Limpa das Capas na Grade da Vitrine (`HomeActivity`)**
+   - Refatoração de `item_game_card.xml`, `bg_card_cover_frame.xml` e `GameCardAdapter` para exibir todas as 430 capas sem cortes (`fitCenter` + `adjustViewBounds`) em moldura escura arredondada (`10dp`) harmonizada ao modal de download, movendo selos (`PS1`/`N64`, `2P`, `SAVE`, `★`, tamanho, `CDs` e `EM CACHE`) para faixas dedicadas acima e abaixo da capa com recorte único no `ViewHolder` para manter rolagem fluida.
+
 ---
 
 ## Qualidade Visual e Upscaling para Fire TV
@@ -110,6 +113,10 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 ---
 
 ## Histórico de Versões
+
+### v1.0.5 (código 6)
+- **Capas sem corte nos cards da grade (`HomeActivity`):** padronização dos cards do catálogo com enquadramento proporcional (`fitCenter` + `adjustViewBounds`) dentro de moldura escura arredondada harmonizada ao modal de download, preservando integralmente capas de PlayStation 1 (incluindo a faixa lateral "PlayStation") e de Nintendo 64 sem cortes ou distorção.
+- **Badges organizadas fora da arte:** indicadores de plataforma (`PS1`/`N64`), multiplayer (`2P`), save (`SAVE`), favorito (`★`), tamanho (`MB`), multi-disco (`CDs`) e cache (`EM CACHE`) reposicionados em faixas superior e inferior dedicadas, mantendo alinhamento uniforme por linha e rolagem fluida na grade de 430 jogos.
 
 ### v1.0.4 (código 5)
 - **Polimento do Modo Leve no Fire TV:** `Modo Leve (Mais Rápido)` passa a combinar resolução interna `1x` com suavização nítida (`ShaderConfig.Sharp`), mantendo os 60 FPS e reduzindo serrilhados em TVs Full HD.
