@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, reunindo **630 clássicos** de **PlayStation 1 (PS1)**, **Nintendo 64 (N64)**, **Arcade**, **Super Nintendo (SNES)** e **Mega Drive** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.1.2`):**  
+> **Download direto da versão mais recente (`v1.1.3`):**  
 > - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
 > - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
@@ -122,6 +122,11 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 ---
 
 ## Histórico de Versões
+
+### v1.1.3 (código 10)
+- **Ajuste de bordas e rolagem da barra de categorias (`Mega Drive (57)`):** calibração do preenchimento lateral em `1080p` e `720p`, `clipToPadding="false"`/`clipChildren="false"` nos containers internos e cálculo determinístico de rolagem horizontal (`computeHorizontalScrollTarget`), garantindo que `Mega Drive (57)` e as pílulas extremas não sejam espremidas nem cortadas ao navegar pelo D-Pad.
+- **Fronteira rígida da grade e reset determinístico ao trocar categorias:** isolamento visual entre cabeçalho/filtros (`llHeaderAndFilters`) e a área da grade (`gridContainer` com `clipChildren="true"` e `clipToPadding="true"`), interrompendo rolagens residuais (`stopScroll`, `scrollToPositionWithOffset(0, 0)`) e zerando deslocamentos em `GameCardAdapter` sempre que o usuário alterna entre `Todos`, `Recentes`, `Com Save`, `PS1`, `N64`, `Arcade`, `SNES` ou `Mega Drive`.
+- **Reconciliação limpa de foco e resumo no cabeçalho:** atualização sem encavalamento para o título selecionado e linha de contagem/resumo em filtros pequenos (como `Com Save`).
 
 ### v1.1.2 (código 9)
 - **Acesso rápido a busca e filtros durante a rolagem (`HomeActivity`):** adição do painel modal **Busca e Filtros Rápidos** (atalhos `Menu`, `L2` ou `F1`), barra flutuante não-intrusiva ao rolar a grade (**Buscar**, **Filtros**, **↑ Topo**), foco rápido na pesquisa (`Busca`, `/` ou `F3`) e retorno instantâneo ao topo/filtros via botão **Voltar** quando rolado para baixo, preservando foco D-Pad previsível.
