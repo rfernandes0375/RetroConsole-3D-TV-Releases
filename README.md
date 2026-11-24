@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, para jogar clássicos de **PlayStation 1 (PS1)** e **Nintendo 64 (N64)** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.0.2`):**  
+> **Download direto da versão mais recente (`v1.0.3`):**  
 > [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
 ---
@@ -61,6 +61,24 @@ Em vez de instalar uma biblioteca inteira no aparelho, o aplicativo opera sob de
    - Remoção do atalho `L1 + R1` (que causava abertura acidental em jogos como *Winning Eleven*) e substituição pelos atalhos seguros `L3 + R3`, `Select + Start` e `Voltar`, atualizando HUD e `QuickMenuControlsGuide`.
    - Adição de checagem silenciosa periódica de atualizações (intervalo mínimo de 30 minutos) com destaque discreto `• Atualizar (vX.Y.Z)` no cabeçalho e faixa de retomada rápida (`Último jogado` + status real de save).
 
+7. **Qualidade Visual HD & CRT Leve Otimizada para Fire TV**
+   - Criação de perfis gráficos configuráveis em tempo real no Menu Rápido (`VisualQualityProfile`): **Aprimorado HD • Recomendado** (padrão inicial com `NEON 2x` no PS1, `640x480`/`960x540` no N64 e shader `Sharp`), **Retrô Tubo • CRT Leve** (resolução 2x + shader `CRT`) e **Padrão • Desempenho Máximo** (`1x` nativo para modelos mais antigos de Fire TV Stick).
+
+---
+
+## Qualidade Visual e Upscaling para Fire TV
+
+Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** nem introduzir *input lag* (evitando filtros pesados como `xBRZ 4x/6x` ou `CRT-Royale`), o **RetroConsole 3D TV** disponibiliza três perfis gráficos leves persistidos entre sessões e alternáveis diretamente em **Menu Rápido → Qualidade Visual**:
+
+| Perfil | PlayStation 1 (`pcsx_rearmed`) | Nintendo 64 (`mupen64plus_next`) | Shader (`GLRetroView`) | Indicação |
+| :--- | :--- | :--- | :--- | :--- |
+| **Aprimorado HD • Recomendado** *(padrão)* | NEON 2x (`pcsx_rearmed_neon_enhancement_enable = enabled`, preservando efeitos 2D) | `640x480` (`4:3`) / `960x540` (`16:9`) | `ShaderConfig.Sharp` (nitidez sem borrão) | Fire TV Stick HD/4K e TV Boxes |
+| **Retrô Tubo • CRT Leve** | NEON 2x (`enabled`) | `640x480` (`4:3`) / `960x540` (`16:9`) | `ShaderConfig.CRT` (suaviza serrilhados e *dithering*) | Visual clássico de TV de tubo |
+| **Padrão • Desempenho Máximo** | Resolução nativa 1x (`disabled`) | `320x240` (`4:3`) / `640x360` (`16:9`) | `ShaderConfig.Default` | Máxima margem de CPU/GPU em aparelhos antigos |
+
+- **Tela cheia intacta:** a mudança de qualidade visual nunca reduz a área da imagem na TV, mantendo a proporção configurada (**4:3 Original** ou **16:9 Widescreen**).
+- **Aplicação imediata e segura:** o shader gráfico é aplicado instantaneamente na fila GL; no Nintendo 64, alterações entre resolução interna `1x` e `2x` entram em vigor completamente ao reabrir o jogo, mantendo o progresso e os saves intactos.
+
 ---
 
 ## Guia Rápido de Instalação e Uso (Fire TV / Android TV)
@@ -97,6 +115,11 @@ Em vez de instalar uma biblioteca inteira no aparelho, o aplicativo opera sob de
 ---
 
 ## Histórico de Versões
+
+### v1.0.3 (código 4)
+- **Perfis de Qualidade Visual e Upscaling leve para Fire TV:** inclusão de 3 perfis gráficos (`Aprimorado HD • Recomendado` como padrão inicial, `Retrô Tubo • CRT Leve` e `Padrão • Desempenho Máximo`) com NEON 2x no PS1 (`pcsx_rearmed_neon_enhancement_enable`), resolução 2x (`640x480`/`960x540`) no N64 e shaders leves (`ShaderConfig.Sharp`, `ShaderConfig.CRT` e `ShaderConfig.Default`), sem reduzir o tamanho da imagem na TV nem sacrificar os 60 FPS.
+- **Seletor em tempo real no Menu Rápido:** botão `Qualidade Visual` navegável por D-Pad/DualShock 4 no Menu Rápido com aplicação instantânea de shader via fila GL, sincronização entre `:player` e catálogo e persistência automática.
+- **Documentação atualizada:** detalhamento dos perfis visuais no `README.md` e sincronização contínua com o repositório público de releases.
 
 ### v1.0.2 (código 3)
 - **Analógicos completos no PS1 (`pcsx_rearmed`):** ativação nativa do modo DualShock/Analógico para Portas 1 e 2 combinada com espelhamento do Analógico Esquerdo para D-Pad (`deadzone 0.40f` e histerese `0.30f`) exclusivamente no PS1, preservando o Nintendo 64 inalterado.
