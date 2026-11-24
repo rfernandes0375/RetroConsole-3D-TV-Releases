@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, reunindo **630 clássicos** de **PlayStation 1 (PS1)**, **Nintendo 64 (N64)**, **Arcade**, **Super Nintendo (SNES)** e **Mega Drive** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.1.1`):**  
+> **Download direto da versão mais recente (`v1.1.2`):**  
 > - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
 > - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
@@ -117,11 +117,16 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 | **Abrir / Fechar Menu Rápido** | **`L3 + R3`**, **`Select + Start`**, `Menu` ou `Voltar` | **`L3 + R3`**, **`Select + Start`**, `Menu` ou `Voltar` | `ESC`, `F1` ou `Voltar` |
 | **Navegar no Menu Rápido** | D-Pad + Cruz (`✕`) / Voltar: Círculo (`○`) | D-Pad + Cruz (`✕`) / Voltar: Círculo (`○`) | Setas ou `W`/`S` + `Enter` |
 
-> **Atalhos extras no catálogo:** `L1`/`R1` alterna entre abas, `R2` inicia um jogo aleatório e `△` (`Y` / `Menu`) adiciona ou remove o jogo focado dos **Favoritos**.
+> **Atalhos extras no catálogo:** `Menu`, `L2` ou `F1` abrem o painel de **Busca e Filtros Rápidos** em qualquer ponto da rolagem; `Busca`, `/` ou `F3` focam direto a caixa de pesquisa; `Voltar` enquanto a grade estiver rolada retorna ao topo nos filtros; `L1`/`R1` alternam abas; `R2` inicia um jogo aleatório; e `△` (`Y`) ou segurar `OK` adicionam/removem o jogo focado dos **Favoritos**.
 
 ---
 
 ## Histórico de Versões
+
+### v1.1.2 (código 9)
+- **Acesso rápido a busca e filtros durante a rolagem (`HomeActivity`):** adição do painel modal **Busca e Filtros Rápidos** (atalhos `Menu`, `L2` ou `F1`), barra flutuante não-intrusiva ao rolar a grade (**Buscar**, **Filtros**, **↑ Topo**), foco rápido na pesquisa (`Busca`, `/` ou `F3`) e retorno instantâneo ao topo/filtros via botão **Voltar** quando rolado para baixo, preservando foco D-Pad previsível.
+- **Ajuste horizontal na barra de filtros (`Mega Drive (57)`):** correção de recorte, preenchimento final e rolagem suave nas faixas de abas e chips para evitar estouro ou colisão na borda direita da TV.
+- **Maior aproveitamento de área das capas nos cards:** redução de folgas externas/internas nos cards com ampliação da moldura de capa para `168dp`, destacando melhor capas verticais/quadradas (PS1) e horizontais (N64, Arcade, SNES e Mega Drive) mantendo `fitCenter` sem cortes.
 
 ### v1.1.1 (código 8)
 - **Correção definitiva de corrupção de imagem e tela preta no Nintendo 64 ao trocar Qualidade Visual:** bloqueio de mutações OpenGL ES em tempo de execução no núcleo `mupen64plus_next` (GLideN64), salvando imediatamente o novo perfil (`Imagem Nítida (HD)`, `TV de Tubo (Retrô)` ou `Modo Leve`) com aviso claro no Menu Rápido para aplicar ao reabrir o jogo.
