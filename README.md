@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, reunindo **630 clássicos** de **PlayStation 1 (PS1)**, **Nintendo 64 (N64)**, **Arcade**, **Super Nintendo (SNES)** e **Mega Drive** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.3.0`):**  
+> **Download direto da versão mais recente (`v1.3.1`):**  
 > - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
 > - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
@@ -24,7 +24,7 @@ Em vez de instalar gigabytes de jogos no aparelho, o aplicativo opera de forma h
 - **Catálogo unificado com 630 jogos e capas locais:**
   - **Clássicos 3D (430 títulos):** **295 de Nintendo 64** e **135 de PlayStation 1** (incluindo **24 jogos multi-disco** de 2, 3 e 4 CDs).
   - **Clássicos 2D integrados do RetroArcade TV (200 títulos):** **82 de Arcade**, **61 de Super Nintendo (SNES)** e **57 de Mega Drive**.
-  - Filtros combináveis por plataforma (**Todos**, **Favoritos**, **Recentes**, **Com Save**, **Nintendo 64**, **PlayStation 1**, **Arcade**, **SNES**, **Mega Drive**), gênero, busca sem acento e modo `2 Jogadores`.
+  - Filtros combináveis por plataforma (**Todos**, **Favoritos**, **Recentes**, **Com Save**, **PS1**, **N64**, **Arcade**, **SNES**, **Mega Drive**), gênero, busca sem acento e modo `2 Jogadores`.
 - **Arquitetura Híbrida de Dois Motores Isolados:**
   - **Motor 3D Nativo (`EngineType.LIBRETRO_3D`):** `LibretroDroid` (`pcsx_rearmed` e `mupen64plus_next`, `armeabi-v7a` e `arm64-v8a`) no processo dedicado `:player`, com cache `active_rom/` / `kept_rom/`, extração `.7z` e `.rar` (RAR4/RAR5) via `libarchive`, Memory Cards/saves locais e os 3 perfis visuais (`Imagem Nítida (HD)`, `TV de Tubo (Retrô)`, `Modo Leve`).
   - **Motor Clássicos 2D Web (`EngineType.ARCADE_WEB`):** `ArcadeWebPlayerActivity` + `ArcadeWebView` + `ArcadeDomCleanerScript` + `ArcadeAdBlocker` integrados do RetroArcade TV, rodando online em tela cheia 16:9 sem anúncios/pop-ups, com suporte a 2 controles DualShock 4 Bluetooth e checagem prévia de conexão.
@@ -122,6 +122,11 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 ---
 
 ## Histórico de Versões
+
+### v1.3.1 (código 15)
+- **Redesenho limpo e simétrico do cabeçalho superior (`HomeActivity`):** título principal **RetroConsole 3D TV** isolado à esquerda, remoção da assinatura solta e do selo de cache do topo (movidos para o modal **Sobre** com a versão do app) e alinhamento exato da barra de busca e dos botões **Aleatório**, **Atualizar** e **Sobre** à borda direita da grade de cards.
+- **Cápsula compacta de retomada:** substituição da faixa dupla de retomada e avisos redundantes (`Sem save`) por um bloco único e discreto exibido somente quando existe partida recente ou save disponível para retomar.
+- **Hierarquia clara entre plataformas e gêneros:** abas principais ordenadas com rótulos concisos (**Todos**, **Favoritos**, **Recentes**, **Com Save**, **PS1**, **N64**, **Arcade**, **SNES**, **Mega Drive**) e chips de gênero mais sutis e compactos na segunda linha, liberando mais área vertical para as capas e preservando `clipToPadding="false"`/`clipChildren="false"`, margens confortáveis nas extremidades e reset determinístico de rolagem na navegação via controle remoto.
 
 ### v1.3.0 (código 14)
 - **Seleção inteligente de fonte por velocidade (*Speed Probe* leve):** quando há mais de uma fonte disponível para o jogo/disco, o downloader mede rapidamente latência (TTFB) e taxa inicial em uma janela curta limitada (até 256 KB, sem baixar arquivos inteiros duplicados) e elege automaticamente o espelho com melhor desempenho efetivo. Se houver apenas uma fonte, o download inicia direto sem atraso.
