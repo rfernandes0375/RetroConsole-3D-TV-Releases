@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, reunindo **630 clássicos** de **PlayStation 1 (PS1)**, **Nintendo 64 (N64)**, **Arcade**, **Super Nintendo (SNES)** e **Mega Drive** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.2.0`):**  
+> **Download direto da versão mais recente (`v1.2.1`):**  
 > - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
 > - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
@@ -122,6 +122,10 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 ---
 
 ## Histórico de Versões
+
+### v1.2.1 (código 12)
+- **Substituição de `.rar` problemáticos no PlayStation 1 por `.7z` verificados (`archive.org`):** atualização dos links primários de *Colin McRae Rally 2.0*, *MediEvil*, *Tomb Raider II: Starring Lara Croft* e *World Soccer Jikkyou Winning Eleven 4* para arquivos `.7z` do `archive.org`, preservando os respectivos espelhos de fallback do `lolroms.com`.
+- **Proteção contra expiração de URLs temporárias (`Fear Effect 2: Retro Helix` e catálogo geral):** detecção automática de tokens assinados expirados (`expires=`/`sig=`) antes da requisição, acionando imediatamente o fallback automático (`lolroms.com`, incluindo a sequência de 4 discos) em caso de expiração, erro HTTP ou falha no Google Drive sem erro fatal para o jogador.
 
 ### v1.2.0 (código 11)
 - **Nova base primária verificada de PlayStation 1 com fallback automático:** atualização dos 135 jogos de PS1 para priorizar espelhos verificados (`downloads.retrostic.com`, `archive.org` e Google Drive) mantendo automaticamente os links originais do `lolroms.com` como fallback transparente (e como fonte exclusiva em *WipEout 3* e *WipEout XL*), com regiões (`USA`, `Europe`, `Japan`, `Brazil`) e tamanhos estimados atualizados.
