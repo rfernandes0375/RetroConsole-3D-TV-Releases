@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, reunindo **630 clássicos** de **PlayStation 1 (PS1)**, **Nintendo 64 (N64)**, **Arcade**, **Super Nintendo (SNES)** e **Mega Drive** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.1.3`):**  
+> **Download direto da versão mais recente (`v1.2.0`):**  
 > - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
 > - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
@@ -14,7 +14,7 @@ O **RetroConsole 3D TV** nasceu para rodar em TVs e TV Boxes com pouco armazenam
 
 Em vez de instalar gigabytes de jogos no aparelho, o aplicativo opera de forma híbrida sob demanda:
 - Navegue por um catálogo curado com **630 jogos** e **630 capas** embutidas (**430 títulos 3D** + **200 clássicos 2D** integrados do **RetroArcade TV**).
-- **Jogos 3D (PS1 e N64):** a ROM compactada (`.7z`) é baixada sob demanda, extraída em área temporária com aceleração nativa e executada a **60 FPS** pelo motor nativo **LibretroDroid** em processo isolado `:player`, gravando permanentemente apenas os seus **saves reais** (Save States e Memory Cards / SRAM validados).
+- **Jogos 3D (PS1 e N64):** a ROM compactada (`.7z` ou `.rar`) é baixada sob demanda com fallback automático de espelhos, extraída em área temporária com aceleração nativa (`libarchive`) e executada a **60 FPS** pelo motor nativo **LibretroDroid** em processo isolado `:player`, gravando permanentemente apenas os seus **saves reais** (Save States e Memory Cards / SRAM validados).
 - **Clássicos 2D (Arcade, SNES e Mega Drive):** executam diretamente via motor web ad-free integrado (**ArcadeWebView**) em tela cheia, sem precisar baixar pacotes `.7z` nem ocupar armazenamento interno do Fire TV (requer internet ativa).
 
 ---
@@ -26,7 +26,7 @@ Em vez de instalar gigabytes de jogos no aparelho, o aplicativo opera de forma h
   - **Clássicos 2D integrados do RetroArcade TV (200 títulos):** **82 de Arcade**, **61 de Super Nintendo (SNES)** e **57 de Mega Drive**.
   - Filtros combináveis por plataforma (**Todos**, **Favoritos**, **Recentes**, **Com Save**, **Nintendo 64**, **PlayStation 1**, **Arcade**, **SNES**, **Mega Drive**), gênero, busca sem acento e modo `2 Jogadores`.
 - **Arquitetura Híbrida de Dois Motores Isolados:**
-  - **Motor 3D Nativo (`EngineType.LIBRETRO_3D`):** `LibretroDroid` (`pcsx_rearmed` e `mupen64plus_next`, `armeabi-v7a` e `arm64-v8a`) no processo dedicado `:player`, com cache `active_rom/` / `kept_rom/`, extração `.7z` via `libarchive`, Memory Cards/saves locais e os 3 perfis visuais (`Imagem Nítida (HD)`, `TV de Tubo (Retrô)`, `Modo Leve`).
+  - **Motor 3D Nativo (`EngineType.LIBRETRO_3D`):** `LibretroDroid` (`pcsx_rearmed` e `mupen64plus_next`, `armeabi-v7a` e `arm64-v8a`) no processo dedicado `:player`, com cache `active_rom/` / `kept_rom/`, extração `.7z` e `.rar` (RAR4/RAR5) via `libarchive`, Memory Cards/saves locais e os 3 perfis visuais (`Imagem Nítida (HD)`, `TV de Tubo (Retrô)`, `Modo Leve`).
   - **Motor Clássicos 2D Web (`EngineType.ARCADE_WEB`):** `ArcadeWebPlayerActivity` + `ArcadeWebView` + `ArcadeDomCleanerScript` + `ArcadeAdBlocker` integrados do RetroArcade TV, rodando online em tela cheia 16:9 sem anúncios/pop-ups, com suporte a 2 controles DualShock 4 Bluetooth e checagem prévia de conexão.
 - **Extração `.7z` nativa acelerada:** decodificação em C/C++ via `libarchive` (com fallback JVM), buffers amplos de `256 KB` e barra de progresso em tempo real exibindo percentual (`%`), velocidade, tamanho em MB, tempo decorrido e estimativa restante.
 - **Armazenamento inteligente e autolimpeza:**
@@ -122,6 +122,14 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 ---
 
 ## Histórico de Versões
+
+### v1.2.0 (código 11)
+- **Nova base primária verificada de PlayStation 1 com fallback automático:** atualização dos 135 jogos de PS1 para priorizar espelhos verificados (`downloads.retrostic.com`, `archive.org` e Google Drive) mantendo automaticamente os links originais do `lolroms.com` como fallback transparente (e como fonte exclusiva em *WipEout 3* e *WipEout XL*), com regiões (`USA`, `Europe`, `Japan`, `Brazil`) e tamanhos estimados atualizados.
+- **Conclusão de multi-discos e pacotes consolidados com failover inteligente:**
+  - Adição dos discos faltantes de *Parasite Eve* (Discos 1 e 2 USA) e *Parasite Eve II* (Discos 1 e 2 Europe).
+  - Suporte aos pacotes consolidados de *Tales of Destiny II*, *Thousand Arms* e *Fear Effect 2: Retro Helix* (PT-BR via Google Drive, ~1,96 GB) com fallback automático para a sequência de discos individuais do `lolroms.com` e geração ordenada da playlist `.m3u` (Discos 1 a 4).
+  - Atualização das versões principais Europe (com fallback automático em USA) nos títulos *Colin McRae Rally 2.0*, *Command & Conquer: Red Alert Retaliation*, *Final Fantasy VII*, *MediEvil*, *Resident Evil 3: Nemesis*, *Tomb Raider II: Starring Lara Croft* e *Tony Hawk's Pro Skater 3*.
+- **Suporte nativo a `.rar` (RAR4 e RAR5) via `libarchive` e Google Drive reforçado:** novo extrator nativo em C/C++ para os 5 títulos `.rar` de PS1 com verificação automática de assinatura binária por candidato, confirmação aprimorada de arquivos grandes no Google Drive e failover transparente em caso de erro HTTP, HTML inesperado, cota excedida ou arquivo corrompido.
 
 ### v1.1.3 (código 10)
 - **Ajuste de bordas e rolagem da barra de categorias (`Mega Drive (57)`):** calibração do preenchimento lateral em `1080p` e `720p`, `clipToPadding="false"`/`clipChildren="false"` nos containers internos e cálculo determinístico de rolagem horizontal (`computeHorizontalScrollTarget`), garantindo que `Mega Drive (57)` e as pílulas extremas não sejam espremidas nem cortadas ao navegar pelo D-Pad.
