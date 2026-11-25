@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, reunindo **630 clássicos** de **PlayStation 1 (PS1)**, **Nintendo 64 (N64)**, **Arcade**, **Super Nintendo (SNES)** e **Mega Drive** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.2.1`):**  
+> **Download direto da versão mais recente (`v1.2.2`):**  
 > - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
 > - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
@@ -122,6 +122,10 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 ---
 
 ## Histórico de Versões
+
+### v1.2.2 (código 13)
+- **Tamanho dinâmico real via `Content-Length` durante o download:** assim que a resposta binária final do servidor informa `Content-Length > 0` (em links primários, de fallback ou Google Drive), o downloader recalibra automaticamente barra de progresso, texto `Baixado / Total`, porcentagem, tempo restante e o subtítulo do modal de download (`PLATAFORMA • XX,X MB • EXT`), mantendo fallback seguro para a estimativa do catálogo quando o servidor omitir `Content-Length` (`chunked`).
+- **Persistência leve do tamanho real descoberto (`UserPrefsRepository`):** o tamanho real retornado pelo servidor passa a ser salvo localmente por jogo/disco para que os cards da grade e futuras aberturas do modal exibam automaticamente o tamanho exato atualizado mesmo após trocas de espelho.
 
 ### v1.2.1 (código 12)
 - **Substituição de `.rar` problemáticos no PlayStation 1 por `.7z` verificados (`archive.org`):** atualização dos links primários de *Colin McRae Rally 2.0*, *MediEvil*, *Tomb Raider II: Starring Lara Croft* e *World Soccer Jikkyou Winning Eleven 4* para arquivos `.7z` do `archive.org`, preservando os respectivos espelhos de fallback do `lolroms.com`.
