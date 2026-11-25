@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, reunindo **630 clássicos** de **PlayStation 1 (PS1)**, **Nintendo 64 (N64)**, **Arcade**, **Super Nintendo (SNES)** e **Mega Drive** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.2.2`):**  
+> **Download direto da versão mais recente (`v1.3.0`):**  
 > - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
 > - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
@@ -28,7 +28,7 @@ Em vez de instalar gigabytes de jogos no aparelho, o aplicativo opera de forma h
 - **Arquitetura Híbrida de Dois Motores Isolados:**
   - **Motor 3D Nativo (`EngineType.LIBRETRO_3D`):** `LibretroDroid` (`pcsx_rearmed` e `mupen64plus_next`, `armeabi-v7a` e `arm64-v8a`) no processo dedicado `:player`, com cache `active_rom/` / `kept_rom/`, extração `.7z` e `.rar` (RAR4/RAR5) via `libarchive`, Memory Cards/saves locais e os 3 perfis visuais (`Imagem Nítida (HD)`, `TV de Tubo (Retrô)`, `Modo Leve`).
   - **Motor Clássicos 2D Web (`EngineType.ARCADE_WEB`):** `ArcadeWebPlayerActivity` + `ArcadeWebView` + `ArcadeDomCleanerScript` + `ArcadeAdBlocker` integrados do RetroArcade TV, rodando online em tela cheia 16:9 sem anúncios/pop-ups, com suporte a 2 controles DualShock 4 Bluetooth e checagem prévia de conexão.
-- **Extração `.7z` nativa acelerada:** decodificação em C/C++ via `libarchive` (com fallback JVM), buffers amplos de `256 KB` e barra de progresso em tempo real exibindo percentual (`%`), velocidade, tamanho em MB, tempo decorrido e estimativa restante.
+- **Seleção inteligente de fonte por velocidade + extração nativa acelerada:** teste inicial leve (*Speed Probe* em faixa limitada sem desperdiçar banda) para eleger o espelho mais rápido, monitoramento contínuo em janela deslizante com troca automática em caso de queda severa de banda, tamanho dinâmico via `Content-Length` e decodificação em C/C++ via `libarchive` (`.7z` / `.rar`) com buffers de `256 KB`.
 - **Armazenamento inteligente e autolimpeza:**
   - `active_rom/`: área temporária limpa automaticamente ao cancelar, encerrar o jogo ou detectar `.7z` corrompido/truncado.
   - `kept_rom/`: opção ao sair do jogo para manter até **1 jogo/disco** no cache para abertura instantânea na próxima partida.
@@ -122,6 +122,10 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 ---
 
 ## Histórico de Versões
+
+### v1.3.0 (código 14)
+- **Seleção inteligente de fonte por velocidade (*Speed Probe* leve):** quando há mais de uma fonte disponível para o jogo/disco, o downloader mede rapidamente latência (TTFB) e taxa inicial em uma janela curta limitada (até 256 KB, sem baixar arquivos inteiros duplicados) e elege automaticamente o espelho com melhor desempenho efetivo. Se houver apenas uma fonte, o download inicia direto sem atraso.
+- **Monitoramento contínuo e troca automática em queda severa de banda:** durante a transferência, a velocidade é avaliada em janela deslizante; caso caia abaixo do limiar crítico (`0,5 MB/s` por janela contínua com volume relevante pendente) e exista espelho alternativo, o downloader limpa o arquivo parcial lento e alterna automaticamente para a próxima fonte (`SWITCHING_SOURCE`), atualizando `Content-Length`, velocidade, ping e ETA no modal, com trava anti-loop.
 
 ### v1.2.2 (código 13)
 - **Tamanho dinâmico real via `Content-Length` durante o download:** assim que a resposta binária final do servidor informa `Content-Length > 0` (em links primários, de fallback ou Google Drive), o downloader recalibra automaticamente barra de progresso, texto `Baixado / Total`, porcentagem, tempo restante e o subtítulo do modal de download (`PLATAFORMA • XX,X MB • EXT`), mantendo fallback seguro para a estimativa do catálogo quando o servidor omitir `Content-Length` (`chunked`).
