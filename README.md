@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, reunindo **630 clássicos** de **PlayStation 1 (PS1)**, **Nintendo 64 (N64)**, **Arcade**, **Super Nintendo (SNES)** e **Mega Drive** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.3.2`):**  
+> **Download direto da versão mais recente (`v1.3.3`):**  
 > - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
 > - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
@@ -122,6 +122,11 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 ---
 
 ## Histórico de Versões
+
+### v1.3.3 (código 17)
+- **Correção definitiva de encerramento ao abrir o Menu Rápido no PS1 (`NativePlayerActivity` / `GlThreadSafeExecutor`):** eliminação de chamadas bloqueantes sem tratamento de erro na `GLThread` do LibretroDroid (`serializeState`, `serializeSRAM`, `unserializeState`, `availableDisks`, `reset`) por meio de executor isolado com `try/catch` e timeout limitado, impedindo que falhas nativas de serialização ou concorrência derrubem o processo `:player`.
+- **Pausa/retomada segura na `GLThread` e blindagem do auto-save preventivo:** envio assíncrono de pausa de áudio e velocidade de quadros dentro da `GLThread` ao abrir o Menu Rápido, atraso de estabilização (`250 ms`) e verificação de folga de memória antes de capturar estado temporário, cancelamento seguro em `onPause` (removendo chamadas tardias em `onStop`) e proteção automática contra reincidência caso uma captura nativa anterior tenha falhado.
+- **Diagnóstico estruturado no `logcat` (`RetroPlayerDiag`):** registro claro de cada etapa da abertura do Menu Rápido, execução do save preventivo, ciclo de vida e retornos da sessão para diagnóstico rápido no Fire TV sem expor dados sensíveis.
 
 ### v1.3.2 (código 16)
 - **Estabilidade do Menu Rápido no PlayStation 1 (`NativePlayerActivity` / `QuickMenuStateController`):** eliminação de chamadas JNI repetidas, atualizações assíncronas de layout e animações de elevação por foco durante a navegação com D-Pad/controle, pausa limpa da renderização (`RENDERMODE_WHEN_DIRTY`) sem recriar a superfície OpenGL ES e interceptação determinística de eventos de botão/analógico para evitar vazamento ou fechamento intermitente no Fire TV.
