@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, reunindo **630 clássicos** de **PlayStation 1 (PS1)**, **Nintendo 64 (N64)**, **Arcade**, **Super Nintendo (SNES)** e **Mega Drive** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.3.6`):**  
+> **Download direto da versão mais recente (`v1.3.7`):**  
 > - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
 > - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
@@ -122,6 +122,11 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 ---
 
 ## Histórico de Versões
+
+### v1.3.7 (código 21)
+- **Correção definitiva de crash nativo (`SIGSEGV`) ao abrir o Menu Rápido no Fire TV (`armeabi-v7a`):** eliminação da atribuição `frameSpeed = 0` durante pausa/saída/troca de disco na `NativePlayerActivity`, que provocava leitura fora dos limites em `LinearResampler::resample` durante callbacks assíncronos do `Oboe` / `AAudio`.
+- **Pausa e retomada seguras serializadas na `GLThread` (`EmulationPauseController`):** substituição do zeramento de velocidade por pausa nativa segura (`LibretroDroid.pause()` / `LibretroDroid.resume()` quando o núcleo está pronto, mantendo `frameSpeed >= 1` e `RENDERMODE_WHEN_DIRTY`), preservando integralmente o auto-save preventivo em `slot0.state` e permitindo abrir e fechar o Menu Rápido repetidamente sem encerrar o processo `:player`.
+- **Telemetria aprimorada no `RetroPlayerDiag` e `[HomeReturn]`:** registro detalhado das transições de pausa/áudio/renderização e classificação explícita de retornos da sessão na `HomeActivity`.
 
 ### v1.3.6 (código 20)
 - **Documentação legal, atribuições de código aberto e privacidade (`AVISO_LEGAL.md` / `README.md`):** inclusão do arquivo [`AVISO_LEGAL.md`](./AVISO_LEGAL.md) na raiz com esclarecimentos de projeto independente, marcas registradas, uso responsável, isenção de garantias (*as-is*), política de privacidade (sem login, anúncios ou coleta de dados) e créditos completos de software de terceiros (LibretroDroid, Libretro, PCSX-ReARMed, Mupen64Plus e bibliotecas Android/Kotlin sob GPL, LGPL, MIT e Apache 2.0).
