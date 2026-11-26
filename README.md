@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, reunindo **630 clássicos** de **PlayStation 1 (PS1)**, **Nintendo 64 (N64)**, **Arcade**, **Super Nintendo (SNES)** e **Mega Drive** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.3.1`):**  
+> **Download direto da versão mais recente (`v1.3.2`):**  
 > - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
 > - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
@@ -122,6 +122,11 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 ---
 
 ## Histórico de Versões
+
+### v1.3.2 (código 16)
+- **Estabilidade do Menu Rápido no PlayStation 1 (`NativePlayerActivity` / `QuickMenuStateController`):** eliminação de chamadas JNI repetidas, atualizações assíncronas de layout e animações de elevação por foco durante a navegação com D-Pad/controle, pausa limpa da renderização (`RENDERMODE_WHEN_DIRTY`) sem recriar a superfície OpenGL ES e interceptação determinística de eventos de botão/analógico para evitar vazamento ou fechamento intermitente no Fire TV.
+- **Auto-save preventivo e recuperação segura (`SaveStateCoordinator`):** disparo assíncrono não-bloqueante de salvamento preventivo de Memory Card e estado temporário dedicado (`slot0.state`) ao abrir o Menu Rápido, antes de trocas/reinicialização e em alertas de memória baixa (`onTrimMemory`/`onLowMemory`), preservando intacto o Save State manual (`slot1.state`) e oferecendo recuperação automática após encerramento inesperado.
+- **Persistência e validação de integridade de ROMs extraídas (`EphemeralRomManager`):** retenção automática da ROM extraída em área persistente protegida contra limpeza de cache do sistema (`filesDir/kept_rom/`) com validação de `.cue`, `.bin` e `.m3u`, permitindo retomar o jogo instantaneamente sem baixar nem descompactar novamente após queda de processo.
 
 ### v1.3.1 (código 15)
 - **Redesenho limpo e simétrico do cabeçalho superior (`HomeActivity`):** título principal **RetroConsole 3D TV** isolado à esquerda, remoção da assinatura solta e do selo de cache do topo (movidos para o modal **Sobre** com a versão do app) e alinhamento exato da barra de busca e dos botões **Aleatório**, **Atualizar** e **Sobre** à borda direita da grade de cards.
