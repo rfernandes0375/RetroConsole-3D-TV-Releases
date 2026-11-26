@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, reunindo **630 clássicos** de **PlayStation 1 (PS1)**, **Nintendo 64 (N64)**, **Arcade**, **Super Nintendo (SNES)** e **Mega Drive** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.3.4`):**  
+> **Download direto da versão mais recente (`v1.3.5`):**  
 > - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
 > - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
@@ -122,6 +122,11 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 ---
 
 ## Histórico de Versões
+
+### v1.3.5 (código 19)
+- **Eliminação da `NoSuchElementException` ao fechar o player após erro nativo (`NativePlayerActivity`):** substituição da coleta bloqueante `first { ... }` sobre `GLRetroView.GLRetroEvents` por `awaitFirstMatchingEventOrNull` (`firstOrNull { ... }`), com cancelamento explícito das corrotinas de eventos/erros em falhas antecipadas e no `onDestroy()`, evitando encerramentos não tratados na thread principal e timeouts de `Activity`.
+- **Diagnóstico claro e limpeza automática para imagens `.ECM` incompatíveis (`EphemeralRomManager` / `DownloadTelemetryFormatter`):** detecção de pacotes extraídos contendo `.bin.ecm` sem imagem de disco pronta (`.cue`/`.bin`, `.chd`, `.pbp` ou `.ccd`/`.iso`), com mensagem objetiva na tela, failover automático quando houver espelho válido e purga automática de slots inválidos antigos no cache preservando os saves intactos.
+- **Atualização da fonte do jogo *Driver* (PlayStation 1):** entrada atualizada no catálogo para priorizar o pacote `.7z` compatível hospedado no `archive.org`, mantendo espelho de fallback configurado.
 
 ### v1.3.4 (código 18)
 - **Auto-save periódico e retomada automática de partida após queda (`NativePlayerActivity` / `SaveStateCoordinator`):** além do auto-save preventivo ao abrir o Menu Rápido e em alertas de memória baixa, o player agora salva automaticamente em segundo plano a cada 2 minutos e meio durante a partida ativa (`slot0.state`, sem sobrescrever o Save State manual em `slot1.state`) e restaura automaticamente o último estado salvo ao reabrir o jogo após encerramento inesperado (com trava anti-loop em caso de falha).
