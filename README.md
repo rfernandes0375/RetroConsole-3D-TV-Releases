@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, reunindo **630 clássicos** de **PlayStation 1 (PS1)**, **Nintendo 64 (N64)**, **Arcade**, **Super Nintendo (SNES)** e **Mega Drive** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.3.5`):**  
+> **Download direto da versão mais recente (`v1.3.6`):**  
 > - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
 > - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
@@ -123,6 +123,11 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 
 ## Histórico de Versões
 
+### v1.3.6 (código 20)
+- **Documentação legal, atribuições de código aberto e privacidade (`AVISO_LEGAL.md` / `README.md`):** inclusão do arquivo [`AVISO_LEGAL.md`](./AVISO_LEGAL.md) na raiz com esclarecimentos de projeto independente, marcas registradas, uso responsável, isenção de garantias (*as-is*), política de privacidade (sem login, anúncios ou coleta de dados) e créditos completos de software de terceiros (LibretroDroid, Libretro, PCSX-ReARMed, Mupen64Plus e bibliotecas Android/Kotlin sob GPL, LGPL, MIT e Apache 2.0).
+- **Sincronização pública automática:** atualização do workflow de release para publicar também o `AVISO_LEGAL.md` ao lado do `README.md` no repositório público de releases.
+- **Transparência discreta na tela "Sobre o App":** inclusão de nota curta e amigável no rodapé do modal **Sobre o App** sem impactar a navegação por D-Pad/controle remoto.
+
 ### v1.3.5 (código 19)
 - **Eliminação da `NoSuchElementException` ao fechar o player após erro nativo (`NativePlayerActivity`):** substituição da coleta bloqueante `first { ... }` sobre `GLRetroView.GLRetroEvents` por `awaitFirstMatchingEventOrNull` (`firstOrNull { ... }`), com cancelamento explícito das corrotinas de eventos/erros em falhas antecipadas e no `onDestroy()`, evitando encerramentos não tratados na thread principal e timeouts de `Activity`.
 - **Diagnóstico claro e limpeza automática para imagens `.ECM` incompatíveis (`EphemeralRomManager` / `DownloadTelemetryFormatter`):** detecção de pacotes extraídos contendo `.bin.ecm` sem imagem de disco pronta (`.cue`/`.bin`, `.chd`, `.pbp` ou `.ccd`/`.iso`), com mensagem objetiva na tela, failover automático quando houver espelho válido e purga automática de slots inválidos antigos no cache preservando os saves intactos.
@@ -218,3 +223,14 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 - **Versão inicial de produção:** motor nativo LibretroDroid (`pcsx_rearmed` e `mupen64plus_next`) em processo isolado `:player`.
 - **Biblioteca completa:** 430 jogos (295 N64 + 135 PS1, incluindo 24 títulos multi-disco PS1) com 430 capas embutidas e download via Google Drive API v3 / `.7z`.
 - **Extração nativa e blindagem:** descompactação `.7z` acelerada via `libarchive` com telemetria completa em tempo real, limpeza automática de `.7z` corrompidos, cache inteligente (`active_rom/` vs. `kept_rom/`), detecção estrita de saves reais e sistema de atualização OTA com validação `SHA-256`.
+
+---
+
+## Aviso Legal e Licenças
+
+- **Projeto independente e não comercial:** o **RetroConsole 3D TV** não possui vínculo, patrocínio ou afiliação com **Nintendo**, **Sony Interactive Entertainment**, **Amazon** ou demais detentores de marcas e títulos exibidos.
+- **Uso responsável:** o aplicativo funciona apenas como interface e ambiente de execução para emulação, cabendo ao usuário utilizar exclusivamente cópias de segurança (ROMs/ISOs) e BIOS sobre os quais possua direito legítimo de uso conforme a legislação vigente.
+- **Fornecimento *as-is* e privacidade:** distribuído no estado em que se encontra, sem garantias contínuas de compatibilidade ou preservação contra falhas/perda de *save states*; sem login, anúncios, coleta de dados pessoais ou telemetria comercial (conexões de rede usadas apenas para checar atualizações e baixar arquivos solicitados pelo usuário).
+- **Componentes de código aberto:** utiliza **LibretroDroid** (GPLv3), **Libretro** (MIT), **PCSX-ReARMed** (GPLv2), **Mupen64Plus** (GPLv2), **libarchive** (Apache 2.0 / BSD / LGPL-compatível) e bibliotecas padrão Android/Kotlin (Apache 2.0).
+
+Consulte todos os detalhes, termos e atribuições completas em [`AVISO_LEGAL.md`](./AVISO_LEGAL.md).
