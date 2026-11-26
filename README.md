@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, reunindo **630 clássicos** de **PlayStation 1 (PS1)**, **Nintendo 64 (N64)**, **Arcade**, **Super Nintendo (SNES)** e **Mega Drive** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.3.3`):**  
+> **Download direto da versão mais recente (`v1.3.4`):**  
 > - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
 > - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
@@ -122,6 +122,13 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 ---
 
 ## Histórico de Versões
+
+### v1.3.4 (código 18)
+- **Auto-save periódico e retomada automática de partida após queda (`NativePlayerActivity` / `SaveStateCoordinator`):** além do auto-save preventivo ao abrir o Menu Rápido e em alertas de memória baixa, o player agora salva automaticamente em segundo plano a cada 2 minutos e meio durante a partida ativa (`slot0.state`, sem sobrescrever o Save State manual em `slot1.state`) e restaura automaticamente o último estado salvo ao reabrir o jogo após encerramento inesperado (com trava anti-loop em caso de falha).
+- **Diagnóstico por dispositivo no `logcat` (`PlayerDiagnostics`):** inclusão da identificação do ambiente/modelo (`FIRE_TV`, `EMULATOR_PC` ou `ANDROID_TV`) nos registros de ciclo de vida, abertura do Menu Rápido e retorno ao catálogo para facilitar a análise em aparelhos reais.
+- **Extração `.7z` com I/O mais eficiente sem travar a tela:** acumulação contígua em buffer de escrita (`512 KB`) na extração nativa (`libarchive`), gravação com `BufferedOutputStream` no extrator Java de contingência e coalescência das atualizações de progresso na UI para ROMs grandes (~500–700+ MB) no Fire TV.
+- **Atualizador OTA 100% funcional de primeira (`AppUpdateManager` / `HomeActivity`):** sincronização explícita em disco (`flush` + `fd.sync`), validação do arquivo APK pronto antes de iniciar o instalador e persistência do APK pendente quando for necessário autorizar *"Instalar apps desconhecidos"*, retomando a instalação automaticamente ao voltar para o app sem precisar repetir a atualização.
+- **Cabeçalho e tela "Sobre" atualizados:** retorno discreto da assinatura `por Rodrigo Ferreira` no topo da vitrine e renovação da tela **Sobre o App** com guia simples e amigável para uso direto na TV.
 
 ### v1.3.3 (código 17)
 - **Correção definitiva de encerramento ao abrir o Menu Rápido no PS1 (`NativePlayerActivity` / `GlThreadSafeExecutor`):** eliminação de chamadas bloqueantes sem tratamento de erro na `GLThread` do LibretroDroid (`serializeState`, `serializeSRAM`, `unserializeState`, `availableDisks`, `reset`) por meio de executor isolado com `try/catch` e timeout limitado, impedindo que falhas nativas de serialização ou concorrência derrubem o processo `:player`.
