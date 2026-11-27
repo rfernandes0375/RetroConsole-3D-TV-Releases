@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, reunindo **630 clássicos** de **PlayStation 1 (PS1)**, **Nintendo 64 (N64)**, **Arcade**, **Super Nintendo (SNES)** e **Mega Drive** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.3.9`):**  
+> **Download direto da versão mais recente (`v1.3.10`):**  
 > - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
 > - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
@@ -122,6 +122,10 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 ---
 
 ## Histórico de Versões
+
+### v1.3.10 (código 24)
+- **Revisão jurídica e de conformidade do [`AVISO_LEGAL.md`](./AVISO_LEGAL.md):** detalhamento expresso da natureza independente e não comercial do projeto, titulares de marcas (**Nintendo**, **Sony Interactive Entertainment**, **Sega**, **Amazon**), diferenciação transparente da arquitetura híbrida (`LIBRETRO_3D` local vs. cliente/navegador `WebView` em `ARCADE_WEB`), isenção *as-is* / *as-available*, conformidade com a **LGPD (Lei nº 13.709/2018)** com armazenamento exclusivamente no dispositivo local, canal oficial de notificação e remoção (*Notice & Takedown*) via GitHub Issues e revisão completa das licenças de software de terceiros (`GPLv3`, `GPLv2`, `MIT`, `BSD`, `Apache 2.0`).
+- **Sincronização pública e tela "Sobre o App":** alinhamento do resumo legal no `README.md` e da nota discreta na tela **Sobre o App** sem alterar a navegação por controle remoto ou gamepad.
 
 ### v1.3.9 (código 23)
 - **Navegação completa por gamepad/joystick na vitrine (`HomeActivity` / `HomeGamepadNavigator`):** suporte explícito a eventos de controles (`SOURCE_GAMEPAD` / `SOURCE_JOYSTICK`) para navegar em TVs Android / Google TV e BlueStacks sem depender de mouse, traduzindo D-Pad, HAT e analógico esquerdo (`AXIS_X`/`AXIS_Y`/`AXIS_HAT_X`/`AXIS_HAT_Y`) com deadzone e histerese anti-cascata e mapeando `BUTTON_A` (confirmar) e `BUTTON_B` (voltar) sem alterar o comportamento padrão do controle remoto Fire TV nem o `FireOs6InputCompat`.
@@ -244,9 +248,9 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 
 ## Aviso Legal e Licenças
 
-- **Projeto independente e não comercial:** o **RetroConsole 3D TV** não possui vínculo, patrocínio ou afiliação com **Nintendo**, **Sony Interactive Entertainment**, **Amazon** ou demais detentores de marcas e títulos exibidos.
-- **Uso responsável:** o aplicativo funciona apenas como interface e ambiente de execução para emulação, cabendo ao usuário utilizar exclusivamente cópias de segurança (ROMs/ISOs) e BIOS sobre os quais possua direito legítimo de uso conforme a legislação vigente.
-- **Fornecimento *as-is* e privacidade:** distribuído no estado em que se encontra, sem garantias contínuas de compatibilidade ou preservação contra falhas/perda de *save states*; sem login, anúncios, coleta de dados pessoais ou telemetria comercial (conexões de rede usadas apenas para checar atualizações e baixar arquivos solicitados pelo usuário).
-- **Componentes de código aberto:** utiliza **LibretroDroid** (GPLv3), **Libretro** (MIT), **PCSX-ReARMed** (GPLv2), **Mupen64Plus** (GPLv2), **libarchive** (Apache 2.0 / BSD / LGPL-compatível) e bibliotecas padrão Android/Kotlin (Apache 2.0).
+- **Projeto independente e não comercial:** o **RetroConsole 3D TV** é gratuito, sem fins lucrativos e não possui vínculo, patrocínio ou afiliação com **Nintendo**, **Sony Interactive Entertainment**, **Sega**, **Amazon** ou demais titulares de marcas, artes e títulos exibidos para catalogação informativa.
+- **Arquitetura híbrida e uso responsável:** no modo 3D (`LIBRETRO_3D`), atua apenas como interface e ambiente local de execução (`LibretroDroid`), cabendo ao usuário utilizar apenas cópias de segurança (ROMs/ISOs) e BIOS com direito legítimo de uso; no modo 2D online (`ARCADE_WEB` / `WebView`), atua somente como cliente de visualização sem hospedar, controlar ou garantir conteúdos de terceiros.
+- **Fornecimento *as-is* / *as-available* e LGPD (Lei nº 13.709/2018):** disponibilizado no estado em que se encontra, sem garantias contínuas de compatibilidade ou preservação contra perda de *save states*/dados locais; sem login, anúncios, rastreadores ou coleta de dados pessoais (saves, favoritos e preferências ficam apenas no dispositivo local; conexões restritas a OTA e recursos solicitados pelo usuário).
+- **Notificação e remoção (*Notice & Takedown*) e código aberto:** solicitações fundamentadas de titulares podem ser enviadas via [Issues do repositório público](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/issues). Utiliza **LibretroDroid** (GPLv3), **Libretro** (MIT), **PCSX-ReARMed** (GPLv2), **Mupen64Plus** (GPLv2), **libarchive** (BSD / Apache 2.0) e bibliotecas **AndroidX / Kotlin / OkHttp / Coroutines** (Apache 2.0).
 
 Consulte todos os detalhes, termos e atribuições completas em [`AVISO_LEGAL.md`](./AVISO_LEGAL.md).
