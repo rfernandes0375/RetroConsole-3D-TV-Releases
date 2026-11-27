@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, reunindo **630 clássicos** de **PlayStation 1 (PS1)**, **Nintendo 64 (N64)**, **Arcade**, **Super Nintendo (SNES)** e **Mega Drive** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.3.7`):**  
+> **Download direto da versão mais recente (`v1.3.8`):**  
 > - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
 > - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
@@ -122,6 +122,13 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 ---
 
 ## Histórico de Versões
+
+### v1.3.8 (código 22)
+- **Compatibilidade dedicada de controles para Fire OS 6 (`Fire OS 6.7.1.1` / `AFT*`) sem alterar outros dispositivos (`FireOs6InputCompat`):** correção do mapeamento de gamepad (como DualShock 4) em aparelhos Fire TV com Fire OS 6 (API `<= 25`), onde `Select` (`Share`) e `Start` (`Options`) chegavam como eventos equivalentes a `Voltar` / `OK` / `Menu`.
+- **Correção cirúrgica nos dois motores (`:player` 3D e `ArcadeWebPlayerActivity` 2D):**
+  - No fluxo **3D (PS1 e N64)**, `Select` e `Start` do gamepad passam a acionar diretamente `Select` e `Start` do console durante a partida sem disparar saída ou abrir o Menu Rápido acidentalmente, mantendo `L3 + R3`, `Select + Start` e o controle remoto funcionando normalmente.
+  - No fluxo **2D Web (Arcade, SNES e Mega Drive)**, `Select` do gamepad envia ficha/`Select` sem acionar `Voltar`/saída e `Start` envia `Start` com reforço de foco na área do jogo.
+- **Isolamento estrito:** o mapeamento padrão permanece 100% idêntico no BlueStacks, Android TV / Google TV e Fire TVs com Fire OS 7 ou superior.
 
 ### v1.3.7 (código 21)
 - **Correção definitiva de crash nativo (`SIGSEGV`) ao abrir o Menu Rápido no Fire TV (`armeabi-v7a`):** eliminação da atribuição `frameSpeed = 0` durante pausa/saída/troca de disco na `NativePlayerActivity`, que provocava leitura fora dos limites em `LinearResampler::resample` durante callbacks assíncronos do `Oboe` / `AAudio`.
