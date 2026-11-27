@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, reunindo **630 clássicos** de **PlayStation 1 (PS1)**, **Nintendo 64 (N64)**, **Arcade**, **Super Nintendo (SNES)** e **Mega Drive** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.3.8`):**  
+> **Download direto da versão mais recente (`v1.3.9`):**  
 > - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
 > - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
@@ -122,6 +122,10 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 ---
 
 ## Histórico de Versões
+
+### v1.3.9 (código 23)
+- **Navegação completa por gamepad/joystick na vitrine (`HomeActivity` / `HomeGamepadNavigator`):** suporte explícito a eventos de controles (`SOURCE_GAMEPAD` / `SOURCE_JOYSTICK`) para navegar em TVs Android / Google TV e BlueStacks sem depender de mouse, traduzindo D-Pad, HAT e analógico esquerdo (`AXIS_X`/`AXIS_Y`/`AXIS_HAT_X`/`AXIS_HAT_Y`) com deadzone e histerese anti-cascata e mapeando `BUTTON_A` (confirmar) e `BUTTON_B` (voltar) sem alterar o comportamento padrão do controle remoto Fire TV nem o `FireOs6InputCompat`.
+- **Pausa automática ao abrir o Menu Rápido no modo 2D Web (`ArcadeWebPlayerActivity` / `ArcadeQuickMenuPauseController`):** o jogo e a WebView passam a pausar automaticamente ao abrir o Menu Rápido e retomam automaticamente ao voltar à partida, respeitando caso o jogador tenha pausado manualmente e mantendo o motor 3D nativo (`LIBRETRO_3D`) 100% isolado.
 
 ### v1.3.8 (código 22)
 - **Compatibilidade dedicada de controles para Fire OS 6 (`Fire OS 6.7.1.1` / `AFT*`) sem alterar outros dispositivos (`FireOs6InputCompat`):** correção do mapeamento de gamepad (como DualShock 4) em aparelhos Fire TV com Fire OS 6 (API `<= 25`), onde `Select` (`Share`) e `Start` (`Options`) chegavam como eventos equivalentes a `Voltar` / `OK` / `Menu`.
