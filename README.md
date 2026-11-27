@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, reunindo **630 clássicos** de **PlayStation 1 (PS1)**, **Nintendo 64 (N64)**, **Arcade**, **Super Nintendo (SNES)** e **Mega Drive** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.3.10`):**  
+> **Download direto da versão mais recente (`v1.3.11`):**  
 > - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
 > - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
@@ -122,6 +122,10 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 ---
 
 ## Histórico de Versões
+
+### v1.3.11 (código 25)
+- **Restauração do comportamento padrão de controles na vitrine (`HomeActivity`):** reversão da tradução customizada de analógico/HAT e botões de gamepad adicionada na `v1.3.9` na tela inicial, restaurando exatamente o comportamento anterior de navegação e foco.
+- **Recursos recentes preservados integralmente:** mantidos sem alterações a pausa automática ao abrir/fechar o Menu Rápido nos clássicos 2D (`ARCADE_WEB` / `ArcadeQuickMenuPauseController`), a compatibilidade isolada para Fire OS 6 (`v1.3.8`) e o [`AVISO_LEGAL.md`](./AVISO_LEGAL.md) revisado (`v1.3.10`).
 
 ### v1.3.10 (código 24)
 - **Revisão jurídica e de conformidade do [`AVISO_LEGAL.md`](./AVISO_LEGAL.md):** detalhamento expresso da natureza independente e não comercial do projeto, titulares de marcas (**Nintendo**, **Sony Interactive Entertainment**, **Sega**, **Amazon**), diferenciação transparente da arquitetura híbrida (`LIBRETRO_3D` local vs. cliente/navegador `WebView` em `ARCADE_WEB`), isenção *as-is* / *as-available*, conformidade com a **LGPD (Lei nº 13.709/2018)** com armazenamento exclusivamente no dispositivo local, canal oficial de notificação e remoção (*Notice & Takedown*) via GitHub Issues e revisão completa das licenças de software de terceiros (`GPLv3`, `GPLv2`, `MIT`, `BSD`, `Apache 2.0`).
