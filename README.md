@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, reunindo **630 clássicos** de **PlayStation 1 (PS1)**, **Nintendo 64 (N64)**, **Arcade**, **Super Nintendo (SNES)** e **Mega Drive** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.3.14`):**  
+> **Download direto da versão mais recente (`v1.3.15`):**  
 > - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
 > - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
@@ -122,6 +122,9 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 ---
 
 ## Histórico de Versões
+
+### v1.3.15 (código 29)
+- **Ativação da minificação/otimização R8 no build Release (`isMinifyEnabled = true`):** redução do código DEX final mantendo regras explícitas de preservação para os módulos nativos JNI (`LibretroDroid` e `libarchive`), ponte `@JavascriptInterface` (`RetroArcadeBridge`), views customizadas de TV, modelos de domínio e números de linha nos registros de erro (`CrashLogWriter`).
 
 ### v1.3.14 (código 28)
 - **Endurecimento de segurança da `WebView` 2D (`ArcadeWebPlayerActivity`):** desativação de `allowFileAccess` e `allowContentAccess` e transição de `mixedContentMode` para `MIXED_CONTENT_COMPATIBILITY_MODE`, mantendo intactos o bridge JS, os controles e o funcionamento de Arcade, SNES e Mega Drive.
