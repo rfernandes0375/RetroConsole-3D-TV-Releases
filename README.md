@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, reunindo **630 clássicos** de **PlayStation 1 (PS1)**, **Nintendo 64 (N64)**, **Arcade**, **Super Nintendo (SNES)** e **Mega Drive** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.3.11`):**  
+> **Download direto da versão mais recente (`v1.3.12`):**  
 > - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
 > - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
@@ -122,6 +122,10 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 ---
 
 ## Histórico de Versões
+
+### v1.3.12 (código 26)
+- **Endurecimento de segurança de rede (`HTTPS` estrito):** desativação de tráfego em texto plano (`android:usesCleartextTraffic="false"`) com política explícita em `network_security_config.xml` (`cleartextTrafficPermitted="false"`), mantendo todas as 630 entradas do catálogo e o fluxo OTA exclusivamente sobre `https://`.
+- **Limpeza de warnings de empacotamento e compilação:** remoção do atributo redundante `extractNativeLibs` do manifesto-fonte (preservado automaticamente via `useLegacyPackaging = true` no Gradle para o `libarchive`/LibretroDroid) e eliminação dos avisos residuais do compilador Kotlin sem alterar o comportamento em execução.
 
 ### v1.3.11 (código 25)
 - **Restauração do comportamento padrão de controles na vitrine (`HomeActivity`):** reversão da tradução customizada de analógico/HAT e botões de gamepad adicionada na `v1.3.9` na tela inicial, restaurando exatamente o comportamento anterior de navegação e foco.
