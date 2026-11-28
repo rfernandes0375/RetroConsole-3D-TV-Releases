@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, reunindo **630 clássicos** de **PlayStation 1 (PS1)**, **Nintendo 64 (N64)**, **Arcade**, **Super Nintendo (SNES)** e **Mega Drive** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.3.16`):**  
+> **Download direto da versão mais recente (`v1.3.17`):**  
 > - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
 > - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
@@ -122,6 +122,11 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 ---
 
 ## Histórico de Versões
+
+### v1.3.17 (código 31)
+- **Resiliência automática de DNS e seleção de espelhos (`ResilientDohDns` / `EphemeralRomManager`):**
+  - Detecção automática de respostas de DNS inválidas ou *sinkhole* de operadora (faixa CGNAT `100.64.0.0/10` / endereços privados ou falhas de resolução) com fallback transparente via **DNS-over-HTTPS** (`https://1.1.1.1/dns-query` e `https://8.8.8.8/resolve`, com cache em memória), recuperando downloads do `archive.org` sem precisar reconfigurar o roteador ou o Fire TV.
+  - Calibração do orçamento inicial do *Speed Probe* (`4,0 s`) para suportar redirecionamentos `302` entre espelhos e inclusão de telemetria objetiva no `RetroPlayerDiag` (`[Download] probe`, `slow_switch`, `group_fail` e `dns_doh_fallback`, sem expor chaves ou query strings).
 
 ### v1.3.16 (código 30)
 - **Proteção preventiva de memória e encerramento na `WebView` 2D para Fire OS 6 (`AFTMM`):** ativação automática do **`Modo Leve (GPU)`** por padrão exclusivamente em aparelhos Fire TV com Fire OS 6 (reduzindo resolução WebGL/RAM durante a inicialização WASM, com alternância manual mantida), guarda para não pausar a `WebView` antes de o núcleo entrar em execução (`RUNNING`) e encerramento limpo e desacoplado (`about:blank` + remoção de hierarquia + `destroy()`) ao voltar para o catálogo.
