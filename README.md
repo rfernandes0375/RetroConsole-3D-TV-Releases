@@ -2,7 +2,7 @@
 
 Aplicativo nativo para **Android TV** e **Amazon Fire TV**, desenvolvido por **Rodrigo Ferreira**, reunindo **630 clássicos** de **PlayStation 1 (PS1)**, **Nintendo 64 (N64)**, **Arcade**, **Super Nintendo (SNES)** e **Mega Drive** com interface desenhada para controle remoto (D-Pad) e controles Bluetooth (como DualShock 4 e gamepads padrão Android).
 
-> **Download direto da versão mais recente (`v1.3.12`):**  
+> **Download direto da versão mais recente (`v1.3.13`):**  
 > - **Pelo Downloader (Fire TV / Android TV):** código **`3690043`** (`aftv.news/3690043`)  
 > - **Link direto do APK:** [Baixar RetroConsole3D-FireTV.apk](https://github.com/rfernandes0375/RetroConsole-3D-TV-Releases/releases/latest/download/RetroConsole3D-FireTV.apk)
 
@@ -122,6 +122,11 @@ Para entregar imagem mais nítida em TVs Full HD sem sacrificar os **60 FPS** ne
 ---
 
 ## Histórico de Versões
+
+### v1.3.13 (código 27)
+- **Modularização interna de baixo risco (sem alteração de comportamento):**
+  - Externalização do script JavaScript de limpeza e ponte do motor 2D Web (`ArcadeDomCleanerScript`) para recurso dedicado (`arcade/dom_cleaner.js`), reduzindo drasticamente o arquivo Kotlin e preservando integralmente os ganchos `pause_game`/`resume_game` e a ponte do EmulatorJS.
+  - Extração por delegação pura de validação de imagens de disco e playlists multi-disco (`DiscImageValidator`: `.ecm`, `.cue`/`.bin`, `.m3u` e ordenação natural) e gerenciamento de marcadores de sessão/escrita atômica (`PlayerSessionMarkerStore`) a partir do `EphemeralRomManager`, mantendo 100% da API e das invariantes intactas com nova suíte de testes de equivalência na JVM.
 
 ### v1.3.12 (código 26)
 - **Endurecimento de segurança de rede (`HTTPS` estrito):** desativação de tráfego em texto plano (`android:usesCleartextTraffic="false"`) com política explícita em `network_security_config.xml` (`cleartextTrafficPermitted="false"`), mantendo todas as 630 entradas do catálogo e o fluxo OTA exclusivamente sobre `https://`.
